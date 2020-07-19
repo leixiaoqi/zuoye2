@@ -1,0 +1,155 @@
+<!DOCTYPE>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+
+
+<style>
+div{
+    position:absolute;
+    text-shadow:3px 2px 2px rgb(122, 85, 85);
+}
+#big{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("image/timg-18.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#score{
+    background-color: hsl(0, 57%, 70%);
+    border: solid 3px black;
+    padding: 10px;
+    border-radius: 5px;
+    height: 70px;
+    width: 90px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+#times{
+    position: relative;
+    left: 10px;
+    top: 20px;
+    background-color: rgb(240, 221, 118);
+    width: 80px;
+    border: solid 3px black;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+</style>
+
+
+</head>
+
+<body>
+<div id="big">
+    <div id="zomId"><img src="image/zombie.png" width="130" height="180"></div>
+    <div id="girl1" ><img src="image/女孩1.png" width="130" height="180"></div>
+    <div id="boy1" ><img src="image/男孩1.png" width="130" height="180"></div>
+    <div id="boy2" ><img src="image/男孩2.png" width="130" height="180"></div>
+     <div id="score"></div>
+     <div id="times"></div>
+</div>
+</body>
+<script type="text/javascript">
+            var zom = 0;
+                nclk = 0;
+                score = 0;   
+                shots = 0; 
+
+            function timing(){
+		     	var x = document.getElementById("times");
+			    var i = 0;
+			    setInterval(updateNum,1000);
+			    updateNum();
+			    function updateNum(){
+				   var j = i++;
+				    x.innerHTML = "已玩" + j + "s";
+		     	}
+		    }
+	        function scoreUp(){
+				score++;
+			}
+			function scoreboard(){
+				document.getElementById("score").innerHTML = "点击次数: "+shots+"<br><br>"+" 得分: "+score;
+            }
+            function tanchuang(){
+                alert("累计未击中丧尸5次，游戏结束");
+                window.location.reload();
+            }
+            function tanchuang2(){
+                alert("击中人类，游戏结束");
+                window.location.reload();
+            }
+
+			window.onload = function(){
+				zom = document.getElementById("zomId");
+                zom.onclick = scoreUp;  
+                nclk = document.getElementById("girl1")
+                nclk.onclick = tanchuang2;
+                nclk2 = document.getElementById("boy1")
+                nclk2.onclick = tanchuang2;
+                nclk3 = document.getElementById("boy2")
+                nclk3.onclick = tanchuang2;
+				document.getElementById("big").onclick = function(){  
+					shots++;
+                    scoreboard(); 
+                    if (shots > score + 4) {
+                        tanchuang();
+                        }
+				    }
+                scoreboard();  
+                floatimg();
+                noclk();
+                noclk2();
+                noclk3();
+                timing();
+            }
+    var s=0,k=0;
+    var i=window.screen.availWidth-130,e=window.screen.availHeight-280;
+
+    var img1=document.getElementById("zomId");
+    function floatimg(){
+        s=Math.round(Math.random()*(i));
+        k=Math.round(Math.random()*(e));
+        img1.style.left=s+"px";
+        img1.style.top=k+"px";
+        setTimeout("floatimg()",1000);
+    }
+        floatimg();
+
+    var img2 = document.getElementById("girl1")
+    function noclk(){
+        s=Math.round(Math.random()*(i));
+        k=Math.round(Math.random()*(e));
+        img2.style.left = s +"px";
+        img2.style.top = k +"px"
+        setTimeout("noclk()",1700);
+    }
+        noclk();
+
+    var img3 = document.getElementById("boy1")
+    function noclk2(){
+        s=Math.round(Math.random()*(i));
+        k=Math.round(Math.random()*(e));
+        img3.style.left = s +"px";
+        img3.style.top = k +"px"
+    setTimeout("noclk2()",1700);
+    }
+        noclk2();
+
+    var img4 = document.getElementById("boy2");
+    function noclk3(){
+        s=Math.round(Math.random()*(i));
+        k=Math.round(Math.random()*(e));
+        img4.style.left = s +"px";
+         img4.style.top = k +"px"
+        setTimeout("noclk3()",1700);
+    }
+        noclk3();
+    </script>
+</html>
